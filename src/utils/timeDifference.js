@@ -1,5 +1,5 @@
-function timeDifference(current, previous) {
-    
+export default function timeDifference(current, previous) {
+    console.log(current, previous)
     var msPerMinute = 60 * 1000;
     var msPerHour = msPerMinute * 60;
     var msPerDay = msPerHour * 24;
@@ -32,8 +32,3 @@ function timeDifference(current, previous) {
          return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
     }
 }
-
-
-// TESTS
-// var current= new Date("2022-05-07T14:45:05.354Z");
-// console.log(timeDifference(current, new Date("2022-05-07T14:43:05.354Z")));

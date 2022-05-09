@@ -6,12 +6,22 @@ import { Typography, Space, Layout, Button, Input, Divider, Drawer, Spin } from 
 import { LoginOutlined, EditOutlined, LogoutOutlined, HistoryOutlined } from '@ant-design/icons';
 import SingupForm from './SingupForm.js';
 import LoginForm from './LoginForm.js';
+import {
+    logout,
+    scan,
+    selectLoading,
+    selectIsLogged,
+  } from './homepageSlice';
 
 
 export default function Homepage() {
     const { Title } = Typography;
     const { Content } = Layout;
     const { Search } = Input;
+
+    const loading = useSelector(selectLoading);
+    const isLogged = useSelector(selectIsLogged);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate()
 
@@ -21,20 +31,20 @@ export default function Homepage() {
 
     return (
         <>
-            <Spin tip="Loading..." spinning={false}>
+            <Spin tip="Loading..." spinning={loading}>
             <Content style={{ margin: '24px 16px 0', textAlign: 'center' }}>
                 <Title level={4} style={{margin: '50px'}}>Authenticate yourself to enable the Crawler App</Title>
                 <Space direction="horizontal" style={{margin: '0 0 20px 0'}}>
-                    <Button onClick={() => setLoginFormVisible(true)} type="primary" shape="round" icon={<LoginOutlined />} size={"large"}>Login</Button>
-                    <Button onClick={() => setSingupFormVisible(true)} type="primary" shape="round" icon={<EditOutlined />} size={"large"}>Sing-up</Button>
-                    <Button hidden={true} danger shape="round" icon={<LogoutOutlined />} size={"large"}>Logout</Button>
+                    <Button hidden={!isLogged} onClick={() => setLoginFormVisible(true)} type="primary" shape="round" icon={<LoginOutlined />} size={"large"}>Login</Button>
+                    <Button hidden={!isLogged} onClick={() => setSingupFormVisible(true)} type="primary" shape="round" icon={<EditOutlined />} size={"large"}>Sing-up</Button>
+                    <Button hidden={isLogged} onClick={() => dispatch(logout())} danger shape="round" icon={<LogoutOutlined />} size={"large"}>Logout</Button>
                 </Space>
                 <Space direction="vertical" style={{ display: 'flex' }}>
                     <Divider>Crawler</Divider>
-                    <Search disabled={true} addonBefore="https://" placeholder="example.com" enterButton="Start Crawl" size="large" onSearch={() => {}}/>
+                    <Search disabled={isLogged}  placeholder="https://www.mysite.com/" enterButton="Start Crawl" size="large" onSearch={target => dispatch(scan({target}))}/>
                 </Space>
                 <Space style={{margin: '20px 0px 0px 0'}}>
-                    <Button onClick={() => navigate("/history")} type="primary" shape="round" icon={<HistoryOutlined />} size={"large"}>Check Past Crawls</Button>
+                    <Button disabled={isLogged} onClick={() => navigate("/history")} type="primary" shape="round" icon={<HistoryOutlined />} size={"large"}>Check Past Crawls</Button>
                 </Space>
             </Content>
 
@@ -57,7 +67,7 @@ export default function Homepage() {
 
             {/* Login form */}
             <Drawer
-                title="Create a new account"
+                title="Log in to your account"
                 placement="right"
                 width={!isMobile ? 720 : ""}
                 onClose={() => setLoginFormVisible(false)}

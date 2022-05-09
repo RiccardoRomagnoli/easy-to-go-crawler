@@ -1,11 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
-import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker, Space } from 'antd';
+import { useDispatch } from 'react-redux';
+import { Form, Button, Col, Row, Input } from 'antd';
+import { singup } from './homepageSlice';
 
 export default function SingupForm({closeDrawer}){
+    const dispatch = useDispatch();
 
-    const onFinish = submit => {
-        //dispatch(signup({username: submit.username, password: submit.password}))
+    const onFinish = ({username, password, firstName, lastName}) => {
+        dispatch(singup({username, password, firstName, lastName}))
         closeDrawer()
     }
 

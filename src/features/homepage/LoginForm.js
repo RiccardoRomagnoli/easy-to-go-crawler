@@ -1,10 +1,13 @@
 import React from 'react';
-import { Form, Button, Col, Row, Input } from 'antd';
+import { useDispatch } from 'react-redux';
+import { Form, Button, Col, Row, Input  } from 'antd';
+import { login } from './homepageSlice';
 
 export default function LoginForm({closeDrawer}){
+    const dispatch = useDispatch();
 
-    const onFinish = submit => {
-        //dispatch(signup({username: submit.username, password: submit.password}))
+    const onFinish = ({username, password})=> {
+        dispatch(login({username, password}))
         closeDrawer()
     }
 
