@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import homepageReducer from '../features/homepage/homepageSlice.js'
 import crawlHistoryReducer from '../features/crawlhistory/crawlHistorySlice.js'
 
