@@ -39,9 +39,9 @@ export default function Homepage() {
                     <Button hidden={!isLogged} onClick={() => setSingupFormVisible(true)} type="primary" shape="round" icon={<EditOutlined />} size={"large"}>Sing-up</Button>
                     <Button hidden={isLogged} onClick={() => dispatch(logout())} danger shape="round" icon={<LogoutOutlined />} size={"large"}>Logout</Button>
                 </Space>
-                <Space direction="vertical" style={{ display: 'flex' }}>
+                <Space direction="vertical" style={{ display: 'flex'}}>
                     <Divider>Crawler</Divider>
-                    <Search disabled={isLogged}  placeholder="https://www.mysite.com/" enterButton="Start Crawl" size="large" onSearch={target => dispatch(scan({target}))}/>
+                    <Search disabled={isLogged} placeholder="https://www.mysite.com/" enterButton="Start Crawl" size="large" onSearch={target => dispatch(scan({target}))}/>
                 </Space>
                 <Space style={{margin: '20px 0px 0px 0'}}>
                     <Button disabled={isLogged} onClick={() => navigate("/history")} type="primary" shape="round" icon={<HistoryOutlined />} size={"large"}>Check Past Crawls</Button>

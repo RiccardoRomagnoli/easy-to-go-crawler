@@ -37,16 +37,16 @@ const Routing = () =>{
 
 root.render(
     <Provider store={store}>
-        <Router>
-            <Layout>
-                <Layout className="page-container">
-                    <Routing/>
-                    <Layout.Footer className="footer" >
-                        <Title level={4}>Easy to Go - Crawler</Title>
-                    </Layout.Footer>   
-                </Layout>
-            </Layout>
-        </Router>
+        <Layout className='page-container'>
+            <Layout.Content>
+                <Router>
+                <Routing/>
+                </Router>
+            </Layout.Content>
+            <Layout.Footer className="footer">
+                <Title level={4}>Easy to Go - Crawler</Title>
+            </Layout.Footer>   
+        </Layout>
     </Provider>
 );
 

@@ -103,7 +103,7 @@ export async function deleteCrawlAPI({id, token}){
         })
 
         if(response.ok){
-            return {ok: response.ok, message:"Crawl deleted"};
+            return {ok: response.ok, message:"Crawl deleted, Refresh"};
         }else{
             const data = await response.json();
             return {ok: response.ok, message:data.message}
