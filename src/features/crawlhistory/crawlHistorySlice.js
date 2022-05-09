@@ -9,10 +9,10 @@ export const getCrawl = createAsyncThunk(
         try{
             const {id, token} = thunkAPI.getState().homepage;
             const {ok, message, data} = await getCrawlsAPI({id, token})
-            if(ok){console.log(data);
+            if(ok)
                 return  {message, data};
-            }else{console.log(data);
-                return thunkAPI.rejectWithValue({message});}
+            else
+                return thunkAPI.rejectWithValue({message});
 
         }catch(err){
             console.log(err);
@@ -53,7 +53,6 @@ export const crawlHistorySlice = createSlice({
             state.loading = true;
         },
         [getCrawl.fulfilled]: (state, action) =>{
-            console.log(action.payload.data)
             state.crawls =  action.payload.data
             state.loading = false;
             message.success(action.payload.message);
